@@ -2,24 +2,9 @@
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
 // const args = process.argv.slice(2);
+const inputs = [];
 let encodedAlphabet = "";
 let result = "";
-
-function shift(n) {
-    for (let i = 0; i < ALPHABET.length; i++) {
-        let offset = (i + n) % ALPHABET.length;
-        encodedAlphabet += ALPHABET[offset];
-    }
-    console.log(encodedAlphabet);
-}
-
-function encode(message) {
-    message = message.toLowerCase();
-    for (let i = 0; i < message.length; i++) {
-        let index = ALPHABET.indexOf(message[i]);
-        result += encodedAlphabet[index];
-    }
-}
 
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -27,7 +12,21 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let inputs = [];
+function encodeAlphabet(n) {
+    for (let i = 0; i < ALPHABET.length; i++) {
+        let offset = (i + n) % ALPHABET.length;
+        encodedAlphabet += ALPHABET[offset];
+    }
+    console.log(encodedAlphabet);
+}
+
+function encodeMessage(message) {
+    message = message.toLowerCase();
+    for (let i = 0; i < message.length; i++) {
+        let index = ALPHABET.indexOf(message[i]);
+        result += encodedAlphabet[index];
+    }
+}
 
 function getUserInput(n) {
     rl.question('Please input a message and a key: ', (answer) => {
@@ -35,8 +34,8 @@ function getUserInput(n) {
         if (n < 2) {
             getUserInput(n+1);
         } else {
-            shift(Number(inputs[1]));
-            encode(inputs[0]);
+            encodeAlphabet(Number(inputs[1]));
+            encodeMessage(inputs[0]);
 
             console.log(`Your encoded message is: ${result}`);
             rl.close();
