@@ -23,16 +23,20 @@ function encodeAlphabet(n) {
 function encodeMessage(message) {
     message = message.toLowerCase();
     for (let i = 0; i < message.length; i++) {
-        let letterIndex = ALPHABET.indexOf(message[i]);
-        result += encodedAlphabet[letterIndex];
+        if (message[i] !== ' ') {
+            let letterIndex = ALPHABET.indexOf(message[i]);
+            result += encodedAlphabet[letterIndex];
+        } else {
+            result += message[i];
+        }
     }
 }
 
 function getUserInput(n) {
     rl.question('Please input a message and a key: ', (answer) => {
-        inputs[n-1] = answer;
+        inputs[n - 1] = answer;
         if (n < 2) {
-            getUserInput(n+1);
+            getUserInput(n + 1);
         } else {
             encodeAlphabet(Number(inputs[1]));
             encodeMessage(inputs[0]);
