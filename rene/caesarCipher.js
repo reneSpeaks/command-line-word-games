@@ -23,8 +23,8 @@ function encodeAlphabet(n) {
 function encodeMessage(message) {
     message = message.toLowerCase();
     for (let i = 0; i < message.length; i++) {
-        let index = ALPHABET.indexOf(message[i]);
-        result += encodedAlphabet[index];
+        let letterIndex = ALPHABET.indexOf(message[i]);
+        result += encodedAlphabet[letterIndex];
     }
 }
 
